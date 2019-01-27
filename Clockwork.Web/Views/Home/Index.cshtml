@@ -1,21 +1,32 @@
-﻿<script>
-function UserAction() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("output").innerHTML = this.responseText;
-        }
-    };
-    xhttp.open("GET", "http://127.0.0.1:5000/api/currenttime", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send();
+﻿<div class="card">
+    <div class="card-header card-header-icon">
+        <div class="card-icon">
+            <img src="https://www.awh.net/Content/Images/WhiteLogo.png" />
+        </div>
+        <h2 class="card-title">AWH Clockwork Project @ViewData["Version"] on @ViewData["Runtime"]!</h2>
+    </div>
+    <div class="card-body">
 
+        <div class="row">
+            <div class="col-lg-6 offset-lg-6">
+                <div class="input-group">
+                    <select class="custom-select" id="timeZoneId">
+                        <option value="" selected>Select for a timezone</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" onclick="clockwork.getCurrentTime()">Get the time</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="logs" class="responsive-table mt-3"></div>
+    </div>
+</div>
+
+@section script{
+    <script>
+        $(document).ready(function () {
+            clockwork.initPage();
+        });
+    </script>
 }
-</script>
-
-<h2>AWH Clockwork Project @ViewData["Version"] on @ViewData["Runtime"]!</h2>
-
-
-<button type="submit" onclick="UserAction()">Get the time</button>
-
-<p id="output"></p>
