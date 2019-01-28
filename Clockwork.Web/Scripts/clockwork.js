@@ -1,4 +1,4 @@
-﻿
+var clockworkHost = "http://localhost:19897/";
 clockwork = {
     tableResponsiveRow: function (timeZone, localTime, utcTime) {
         return "<div class='row no-gutters'>"
@@ -24,7 +24,7 @@ clockwork = {
     },
     initPage: function () {
         $.ajax({
-            url: "http://localhost:62274/api/logs",
+            url: clockworkHost+ "api/logs",
             success: function (result) {
                 $.each(result, function (i, item) {
                     $('#logs').append(
@@ -34,7 +34,7 @@ clockwork = {
             }
         })
         $.ajax({
-            url: "http://localhost:62274/api/timezones",
+            url: clockworkHost + "api/timezones",
             success: function (result) {
                 $.each(result, function (i, item) {
                     $("#timeZoneId").append(
@@ -46,7 +46,7 @@ clockwork = {
     },
     getCurrentTime: function () {
         $.ajax({
-            url: "http://localhost:62274/api/currenttime",
+            url: clockworkHost + "api/currenttime",
             data: { timeZoneId: $("#timeZoneId").val() },
             success: function (result) {
                 $('#logs').prepend(
@@ -55,5 +55,4 @@ clockwork = {
             }
         })
     }
-
 }
